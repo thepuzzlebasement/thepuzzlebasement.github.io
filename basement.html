@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Basement</title>
+    <style>
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px red; }
+            50% { text-shadow: -2px -2px blue; }
+            100% { text-shadow: 2px -2px green; }
+        }
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 20%;
+            background-image: url('static-noise.gif'); /* Creates a flickering effect */
+            background-size: cover;
+        }
+        h1 {
+            animation: glitch 1s infinite;
+        }
+        #door {
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        #inputField {
+            background: black;
+            border: 1px solid white;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            padding: 5px;
+            width: 200px;
+        }
+        #message {
+            display: none;
+            margin-top: 20px;
+            font-style: italic;
+            color: red;
+        }
+        .secret {
+            position: absolute;
+            bottom: 5%;
+            right: 3%;
+            color: gray;
+            font-size: 12px;
+            opacity: 0.3;
+            transition: opacity 1s;
+        }
+        .secret:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Basement</h1>
+    <p>A heavy door stands before you.</p>
+    <p id="door">It will not open without an offering.</p>
+    
+    <input type="text" id="inputField" placeholder="Enter the key..." onkeypress="checkCode(event)">
+    <p id="message">Incorrect. The basement rejects you.</p>
+
+    <!-- A secret clickable text -->
+    <p class="secret" onclick="hiddenLink()">Do not linger too long...</p>
+
+    <script>
+        function checkCode(event) {
+            if (event.key === "Enter") {
+                let input = document.getElementById("inputField").value.toLowerCase();
+                if (input === "open sesame") { 
+                    window.location.href = "hallway.html";
+                } else {
+                    document.getElementById("message").style.display = "block";
+                }
+            }
+        }
+        function hiddenLink() {
+            window.location.href = "corrupted.html"; // Leads to an alternate reality
+        }
+    </script>
+
+</body>
+</html>

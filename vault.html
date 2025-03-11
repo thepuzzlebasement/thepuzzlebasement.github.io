@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vault</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 20%;
+        }
+        #vault {
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+        #inputField {
+            background: black;
+            border: 1px solid white;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            padding: 5px;
+            width: 250px;
+        }
+        #error {
+            display: none;
+            margin-top: 20px;
+            font-style: italic;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Whispering Vault</h1>
+    <p>A voice hisses: "You do not belong. Speak the name and be spared."</p>
+    
+    <input type="text" id="inputField" placeholder="Enter the name..." onkeypress="checkPassword(event)">
+    <p id="error">The vault remains shut. The whispering grows louder.</p>
+
+    <script>
+        function checkPassword(event) {
+            if (event.key === "Enter") {
+                let input = document.getElementById("inputField").value.toLowerCase();
+                if (input === "puzzlekeeper") { // Change this password
+                    window.location.href = "archive.html";
+                } else {
+                    document.getElementById("error").style.display = "block";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

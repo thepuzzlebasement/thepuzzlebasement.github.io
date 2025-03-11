@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hallway</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 15%;
+        }
+        .door {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid white;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .hidden {
+            display: none;
+        }
+        #message {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Hallway</h1>
+    <p>Three doors stand before you. Choose wisely.</p>
+
+    <div class="door" id="door1" onclick="selectDoor(1)">🚪 Door 1</div>
+    <div class="door" id="door2" onclick="selectDoor(2)">🚪 Door 2</div>
+    <div class="door" id="door3" onclick="selectDoor(3)">🚪 Door 3</div>
+
+    <p id="message"></p>
+    <button id="switchButton" class="hidden" onclick="switchDoor()">Switch Door</button>
+    <button id="stickButton" class="hidden" onclick="stickWithDoor()">Stick With My Choice</button>
+
+    <script>
+        let correctDoor = Math.floor(Math.random() * 3) + 1;
+        let selectedDoor = null;
+        let revealedDoor = null;
+
+        function selectDoor(door) {
+            selectedDoor = door;
+            let remainingDoors = [1, 2, 3].filter(d => d !== correctDoor && d !== selectedDoor);
+            revealedDoor = remainingDoors[Math.floor(Math.random() * remainingDoors.length)];
+
+            document.getElementById(`door${revealedDoor}`).style.opacity = "0.5";
+            document.getElementById("message").textContent = `Door ${revealedDoor} is revealed to be incorrect. Do you want to switch?`;
+            document.getElementById("switchButton").classList.remove("hidden");
+            document.getElementById("stickButton").classList.remove("hidden");
+        }
+
+        function switchDoor() {
+            selectedDoor = [1, 2, 3].find(d => d !== selectedDoor && d !== revealedDoor);
+            checkResult();
+        }
+
+        function stickWithDoor() {
+            checkResult();
+        }
+
+        function checkResult() {
+            if (selectedDoor === correctDoor) {
+                window.location.href = "vault.html";
+            } else {
+                window.location.href = "https://www.google.com";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 10%;
+        }
+        .file {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid white;
+            cursor: pointer;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Archive</h1>
+    <p>You have reached the heart of the Puzzle Basement. Here lies the lost knowledge.</p>
+
+    <div class="file" onclick="openFile('journal.txt')">📄 Forgotten Journal</div>
+    <div class="file" onclick="openFile('audio.mp3')">🔊 Distorted Recording</div>
+    <div class="file" onclick="openFile('map.png')">🗺️ Cryptic Map</div>
+
+    <script>
+        function openFile(file) {
+            alert("You have unlocked: " + file);
+        }
+    </script>
+
+</body>
+</html>
