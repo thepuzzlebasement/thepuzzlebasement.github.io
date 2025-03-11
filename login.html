@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restricted Access</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://connect.facebook.net/en_US/sdk.js" async defer></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 10%;
+        }
+        .login-button {
+            background: darkred;
+            color: white;
+            border: 1px solid white;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Restricted Access</h1>
+    <p>Only Seekers with permission may enter.</p>
+
+    <!-- Google Login Button -->
+    <div id="g_id_onload"
+         data-client_id="846228617151-ebnadm800hbm0rah7269nvov81l35dvu.apps.googleusercontent.com"
+         data-callback="handleGoogleLogin"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <!-- Facebook Login Button -->
+    <button class="login-button" onclick="facebookLogin()">Login with Facebook</button>
+
+    <!-- Apple Login Button -->
+    <button class="login-button" onclick="appleLogin()">Login with Apple</button>
+
+    <p id="login-status"></p>
+
+    <script>
+        // Google Login Handler
+        function handleGoogleLogin(response) {
+            console.log("Google response:", response);
+            let credential = response.credential;
+            document.getElementById("login-status").textContent = "Google Authentication Successful!";
+            setTimeout(() => { window.location.href = "seekers.html"; }, 2000);
+        }
+
+        // Facebook Login Handler
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: 'YOUR_FACEBOOK_APP_ID',
+                cookie: true,
+                xfbml: true,
+                version: 'v12.0'
+            });
+        };
+
+        function facebookLogin() {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    document.getElementById("login-status").textContent = "Facebook Authentication Successful!";
+                    setTimeout(() => { window.location.href = "seekers.html"; }, 2000);
+                } else {
+                    document.getElementById("login-status").textContent = "Facebook Login Failed.";
+                }
+            }, {scope: 'public_profile,email'});
+        }
+
+        // Apple Login (Requires Apple Developer Account)
+        function appleLogin() {
+            document.getElementById("login-status").textContent = "Apple Login Initiated...";
+            window.location.href = "https://appleid.apple.com/auth/authorize?client_id=YOUR_APPLE_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email";
+        }
+    </script>
+
+</body>
+</html>
